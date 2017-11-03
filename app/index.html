@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+		<title></title>
+		<link rel="stylesheet" href="css/index.css"/>
+	</head>
+	<body>
+		<div id="wrap">
+			<canvas></canvas>
+			<ul class="list">
+				<li class="first">
+					<ul class="firstText">
+						<li>
+							<p>曾经做为前端开发的你</p>
+							<p>解决PC兼容性而焦头烂额</p>
+						</li>
+						<li>
+							<p>而今</p>
+							<p>移动端H5应用疯狂来袭</p>
+						</li>
+						<li>
+							<p>你是否已准备充分</p>
+							<p>学习新技能</p>
+						</li>
+						<li>
+							<p>曾破茧成蝶、重获新生？</p>
+						</li>
+					</ul>
+				</li>
+				<li class="second">
+					<ul class="secondLg">
+						<li class="secondLg1"></li>
+						<li class="secondLg2"></li>
+						<li class="secondLg3"></li>
+						<li class="secondLg4"></li>
+						<li class="secondLg5"></li>
+						<li class="secondLg6"></li>
+					</ul>
+				</li>
+				<li class="third">
+					<div class="third1"></div>
+				</li>
+				<li class="fourth">
+					<p class="fourth1">transform  transition  rotate  scale  translate  keyframes animation  webkitTransitionEnd webkitAnimationIteration elapsedTime perspective…</p>
+					<p class="fourth2">drawImage lineWidth  strokeStyle  lineCap  globalCompositeOperation  moveTo   lineTo  stroke  arc  getImageData…</p>
+					<p class="fourth3">audio autoplay loop  paused  play  pause…</p>
+				</li>
+				<li class="fifth"></li>
+			</ul>
+			<div class="arrow"></div>
+			<div class="music musicMove">
+				<audio src="img/music.mp3"></audio>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//禁止默认
+		document.addEventListener("touchstart",function(ev){
+			ev=ev||event;
+			ev.preventDefault();
+		});
+		//rem适配
+		(function(){
+			var styleNode = document.createElement("style");
+			var width = document.documentElement.clientWidth/16;
+			styleNode.innerHTML = "html{font-size:" + width + " px !important}"
+			document.body.appendChild(styleNode)
+		})()
+		
+		window.onload=function(){
+			var musicWrap = document.querySelector("#wrap .music");
+			var audio = document.querySelector("#wrap .music audio");
+			var list = document.querySelector("#wrap .list");
+			var lis = document.querySelectorAll("#wrap .list>li");
+			var height = document.documentElement.clientHeight;
+			var index = 0;
+			var oldindex = 0;
+			var startY = 0;
+			var disY = 0;
+			var now = 0;
+			//定义出入场动画
+			var outInAn = [
+				{
+					out:function(){
+						var P1 = document.querySelectorAll("#wrap .list .first .firstText li")[0];
+						var P2 = document.querySelectorAll("#wrap .list .first .firstText li")[1];
+						var P3 = document.querySelectorAll("#wrap .list .first .firstText li")[2];
+						var P4 = document.querySelectorAll("#wrap .list .first .firstText li")[3];
+						P1.style.transform = "translateX(100px)";
+						P1.style.opacity = 0;
+						P2.style.transform = "translateX(50px)";
+						P2.style.opacity = 0;
+						P3.style.transform = "translateX(-50px)";
+						P3.style.opacity = 0;
+						P4.style.transform = "translateX(-50px)";
+						P4.style.opacity = 0;
+					},
+					in:function(){
+						var P1 = document.querySelectorAll("#wrap .list .first .firstText li")[0];
+						var P2 = document.querySelectorAll("#wrap .list .first .firstText li")[1];
+						var P3 = document.querySelectorAll("#wrap .list .first .firstText li")[2];
+						var P4 = document.querySelectorAll("#wrap .list .first .firstText li")[3];
+						P1.style.transform = "translateX(0px)";
+						P1.style.opacity = 1;
+						P2.style.transform = "translateX(0px)";
+						P2.style.opacity = 1;
+						P3.style.transform = "translateX(0px)";
+						P3.style.opacity = 1;
+						P4.style.transform = "translateX(0px)";
+						P4.style.opacity = 1;
+					}
+				},
+				{
+					out:function(){
+						var LG1 = document.querySelector("#wrap .list .second .secondLg1");
+						var LG2 = document.querySelector("#wrap .list .second .secondLg2");
+						var LG3 = document.querySelector("#wrap .list .second .secondLg3");
+						var LG4 = document.querySelector("#wrap .list .second .secondLg4");
+						var LG5 = document.querySelector("#wrap .list .second .secondLg5");
+						var LG6 = document.querySelector("#wrap .list .second .secondLg6");
+						LG1.style.transform = "translateY(0px) rotate(720deg)";
+						LG2.style.transform = "translateY(0px) rotate(720deg)";
+						LG3.style.transform = "translateY(0px) rotate(720deg)";
+						LG4.style.transform = "translateY(0px) rotate(720deg)";
+						LG5.style.transform = "translateY(0px) rotate(720deg)";
+						LG6.style.transform = "translateY(0px) rotate(720deg)";
+					},
+					in:function(){
+						var LG1 = document.querySelector("#wrap .list .second .secondLg1");
+						var LG2 = document.querySelector("#wrap .list .second .secondLg2");
+						var LG3 = document.querySelector("#wrap .list .second .secondLg3");
+						var LG4 = document.querySelector("#wrap .list .second .secondLg4");
+						var LG5 = document.querySelector("#wrap .list .second .secondLg5");
+						var LG6 = document.querySelector("#wrap .list .second .secondLg6");
+						LG1.style.transform = "translateY(-120px) rotate(720deg)";
+						LG2.style.transform = "translate(100px,60px) rotate(720deg)";
+						LG3.style.transform = "translate(100px,-60px) rotate(720deg)";
+						LG4.style.transform = "translateY(120px) rotate(720deg)";
+						LG5.style.transform = "translate(-100px,-60px) rotate(720deg)";
+						LG6.style.transform = "translate(-100px,60px) rotate(720deg)";
+					}
+				},
+				{
+					out:function(){
+						var third1 = document.querySelector("#wrap .list .third .third1");
+						third1.style.transform = "rotate(720deg)";
+					},
+					in:function(){
+						var third1 = document.querySelector("#wrap .list .third .third1");
+						third1.style.transform = "rotate(0deg)";
+					}
+				},
+				{
+					out:function(){
+						var fourth1 = document.querySelector("#wrap .list .fourth .fourth1");
+						var fourth2 = document.querySelector("#wrap .list .fourth .fourth2");
+						var fourth3 = document.querySelector("#wrap .list .fourth .fourth3");
+						fourth1.style.width = "0px";
+						fourth1.style.height = "0px";
+						fourth2.style.width = "0px";
+						fourth2.style.height = "0px";
+						fourth3.style.width = "0px";
+						fourth3.style.height = "0px";
+					},
+					in:function(){
+						var fourth1 = document.querySelector("#wrap .list .fourth .fourth1");
+						var fourth2 = document.querySelector("#wrap .list .fourth .fourth2");
+						var fourth3 = document.querySelector("#wrap .list .fourth .fourth3");
+						fourth1.style.width = "120px";
+						fourth1.style.height = "130px";
+						fourth2.style.width = "160px";
+						fourth2.style.height = "100px";
+						fourth3.style.width = "55px";
+						fourth3.style.height = "130px";
+					}
+				},
+				{
+					out:function(){
+						console.log("555");
+					},
+					in:function(){
+						console.log("555");
+					}
+				}
+			]
+			music();
+			play();
+			
+			//滑动
+			//当move时的Y值比start的Y大时说明向下划了,切到下一张
+			function play(){
+				
+				list.addEventListener("touchstart",function(ev){
+					ev=ev||event;
+					var touch = ev.changedTouches[0];
+					startY = touch.clientY;
+				});
+				list.addEventListener("touchmove",function(ev){
+					ev=ev||event;
+					var touch = ev.changedTouches[0];
+					disY = touch.clientY - startY;
+					
+//					if(disY > 0||disY > 20){
+//						index--;
+//						if(index<0){
+//							index=4;
+//						}
+//						lis[oldindex].style.transform = "translateY("+ +disY +"px) scale(.6)";
+//						lis[index].style.display = "block";
+//						lis[index].style.transform = "translateY("+ -height +"px)";
+//						lis[oldindex].style.display = "none";
+//						oldindex = index;
+//					}else if(disY < 0||disY > 20){
+//						index++;
+//						if(index>4){
+//							index=0;
+//						}
+//						lis[oldindex].style.transform = "translateY("+ disY +"px) scale(.6)";
+//						lis[index].style.display = "block";
+//						lis[index].style.transform = "translateY("+ height +"px)"
+//						lis[oldindex].style.display = "none";
+//						oldindex = index;
+////						lis[oldindex].addEventListener("transitionend",function(){
+////							lis[index].style.display = "block";
+////							lis[oldindex].style.display = "none";
+////							oldindex = index;
+////						})
+//					}
+				})
+				list.addEventListener("touchend",function(ev){
+					ev=ev||event;
+					var touch = ev.changedTouches[0];
+					var endY = touch.clientY;
+					if(endY > startY){
+						index--;
+						if(index<0){
+							index=4;
+						}
+						lis[oldindex].style.transform = "translateY("+ height +"px) scale(.6)";
+						lis[index].style.display = "block";
+						lis[index].style.transform = "translateY(0px)";
+						lis[oldindex].style.display = "none";
+						oldindex = index;
+					}else if(endY < startY){
+						index++;
+						if(index>4){
+							index=0;
+						}
+						lis[oldindex].style.transform = "translateY("+ -height +"px) scale(.6)";
+						lis[index].style.display = "block";
+						lis[index].style.transform = "translateY(0px)"
+						lis[oldindex].style.display = "none";
+						oldindex = index;
+					}
+					outInAn[oldindex]["out"]();
+					outInAn[index]["in"]();
+				})
+			}
+			//音频图标
+			function music(){
+				musicWrap.onclick = function(){
+					if(audio.paused){
+						audio.play();
+						musicWrap.classList.add("musicMove");
+					}else{
+						audio.pause();
+						musicWrap.classList.remove("musicMove");
+					}
+				}
+			}
+			//画布遮罩层的逻辑
+			var oc = document.querySelector("#wrap canvas");
+			if(oc.getContext){
+				oc.width = document.documentElement.clientWidth;
+				oc.height = document.documentElement.clientHeight;
+				var ctx = oc.getContext("2d");
+				var img  = new Image();
+				img.src = "./img/a.png"
+				img.onload = function(){
+					draw(img);
+				}
+			}
+			function draw(img){
+				ctx.drawImage(img,0,0,oc.width,oc.height);
+				//点击
+				oc.addEventListener("touchstart",function(ev){
+					ev=ev||event;
+					var touchX = ev.changedTouches[0];
+					var x = touchX.clientX;
+					var y = touchX.clientY;
+					ctx.globalCompositeOperation="destination-out";
+					ctx.lineWidth = 40;
+					ctx.lineCap = "round";
+					ctx.lineJoin="round";
+					
+					ctx.beginPath();
+					ctx.moveTo(x,y);
+					ctx.lineTo(x+1,y+1);
+					ctx.stroke();
+					
+				})
+				//手指移动
+				oc.addEventListener("touchmove",function(ev){
+					ev=ev||event;
+					var touchX = ev.changedTouches[0];
+					var x = touchX.clientX;
+					var y = touchX.clientY;
+				
+					ctx.lineTo(x+1,y+1);
+					ctx.stroke();
+				})
+				//手指抬起
+				oc.addEventListener("touchend",function(ev){
+					ev=ev||event;
+					var touchX = ev.changedTouches[0];
+					//找出所有像素的RGBA,当透明的超过总数的2/1时,所有像素都透明
+					var imgData = ctx.getImageData(0,0,oc.width,oc.height);
+					var allPx = imgData.width*imgData.height;
+					var flag = 0
+					for(var i=0;i<allPx;i++){
+						if(imgData.data[i*4+3]===0){
+							flag++
+						}
+					}
+					if(flag > allPx/2){
+						oc.style.opacity = 0;
+					}
+					//过渡结束后canvas就没用了,最好清除掉,以免站位影响其他元素
+					oc.addEventListener("transitionend",function(){
+						oc.remove();
+						audio.play();
+						for(var i=0;i<lis.length;i++){
+							outInAn[i]["out"]();
+						}
+						outInAn[0]["in"]();
+					})
+
+				})
+			}
+
+		}
+	</script>
+</html>
+
