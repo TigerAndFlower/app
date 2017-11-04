@@ -1,0 +1,173 @@
+@import "common/reset";
+@import "common/common";
+@import "common/animation";
+#wrap{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    canvas{
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: 1s opacity;
+        z-index: 10;
+    }
+    .list{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        .first{
+            .listLi(b);
+            background-size: 100% 100%;
+            .firstText{
+                position: absolute;
+                left: 30%;
+                top: 65%;
+                font-size: 30px;
+                color: white;
+                li{
+                    transition: 2s transform,2s opacity;
+                }
+            }
+        }
+        .second{
+            display: none;
+            .listLi(c);
+            background-size: 100% 100%;
+            .secondLg{
+                .secondLg1{
+                    .secondLgstyle(c1);
+                    background-size: 100%,100%;
+                } 
+                .secondLg2{
+                    .secondLgstyle(c2);
+                    background-size: 100%,100%;
+                }
+                .secondLg3{
+                    .secondLgstyle(c3);
+                    background-size: 100%,100%;
+                }
+                .secondLg4{
+                    .secondLgstyle(c4);
+                    background-size: 100%,100%;
+                }
+                .secondLg5{
+                    .secondLgstyle(c5);
+                    background-size: 100%,100%;
+                }
+                .secondLg6{
+                    .secondLgstyle(c6);
+                    background-size: 100%,100%;
+                }
+            }
+        }
+        .third{
+            display: none;
+            .listLi(d);
+            background-size: 100% 100%;
+            .third1{
+                position: absolute;
+                left: 50%;
+                top: 60%;
+                width: 230px;
+                height: 111px;
+                margin-left: -115px;
+                transition: 2s transform;
+                background: url(../img/d1.png) no-repeat;
+                background-size: 100%,100%;
+            }
+        }
+        .fourth{
+            display: none;
+            .listLi(e);
+            background-size: 100% 100%;
+            .fourth1{
+                .fourthLi();
+                width: 120px;
+                height: 130px;
+                left: 4%;
+                top: 15%;    
+            }
+            .fourth2{
+                .fourthLi();
+                width: 160px;
+                height: 100px;
+                left: 50%;
+                top: 19%;
+            }
+            .fourth3{
+                .fourthLi();
+                width: 55px;
+                height: 140px;
+                left: 78%;
+                top: 40%;
+            }
+        }
+        .fifth{
+            display: none;
+            .listLi(f);
+            background-size: 100% 100%;
+        }
+    }
+    //下面小图标
+    .arrow{
+        position: absolute;
+        left: 50%;
+        bottom: 5%;
+        width: 45px;
+        height: 26px;
+        background: url(../img/arr.png) no-repeat;
+        background-size: 100%,100%;
+        margin-left: -23px;  
+        transition: 1s all;
+        animation: 1s move linear infinite ; 
+        z-index: 5;
+    }
+    .music{
+        position: absolute;
+        left: 90%;
+        top: 2%;
+        width: 25px;
+        height: 25px;
+        background-color: red;
+        background: url(../img/music.png) no-repeat;  
+        background-size: 100%,100%;
+        z-index: 5;
+    }
+    .musicMove{
+        animation: 1s music linear infinite;
+    }
+    //滑屏
+    .xyz{
+        z-index: 1;
+    }
+    .dqz{
+        z-index: 2;
+    }
+}
+
+
+//向下滑动时上一张
+//*{
+//  display: block;
+//  transform: translateY(0px);
+//  z-index: 2;
+//}
+//当前张
+//{
+//  动画结束以后display: none
+//  transform: translateY(667px);
+//  z-index: 1;
+//}
+//向上滑动时下一张
+//*{
+//         动画结束以后display: none
+//  transform: translateY(0px);
+//  z-index: 2;
+//}
+//当前张
+//{
+//  display: none;
+//  transform: translateY(667px);
+//  z-index: 1;
+//}
